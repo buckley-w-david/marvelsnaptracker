@@ -50,7 +50,12 @@ declare namespace ourActiveWin {
     title: string | undefined;
   }
 
-  type Result = MacOSResult | WindowsResult;
+  interface LinuxResult extends BaseResult {
+    platform: 'linux';
+    title: string | undefined;
+  }
+
+  type Result = MacOSResult | WindowsResult | LinuxResult;
 }
 
 declare const ourActiveWin: {
@@ -78,7 +83,7 @@ declare const ourActiveWin: {
 	```
 	*/
   sync(): ourActiveWin.Result | undefined;
-  /**Get stream 
+  /**Get stream
   @returns The active window metadata.*/
 
   launch(justEmbed?: boolean): import('child_process').ChildProcessWithoutNullStreams | undefined;

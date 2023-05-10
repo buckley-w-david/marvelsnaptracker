@@ -17,5 +17,9 @@ module.exports.launch = (JustDoInjection) => {
     return require('./lib/windows-emit').launch(JustDoInjection);
   }
 
-  throw new Error('macOS and Windows only');
+  if (process.platform === "linux") {
+    return require('./lib/linux-emit').launch(JustDoInjection);
+  }
+
+  throw new Error('Linux and Windows only');
 };
