@@ -9,7 +9,11 @@ module.exports.sync = () => {
     return require('./lib/windows').sync();
   }
 
-  throw new Error('macOS and Windows only');
+  if (process.platform === "linux") {
+    return require('./lib/linux').sync();
+  }
+
+  throw new Error(`${process.platform} is not supported`);
 };
 
 module.exports.launch = (JustDoInjection) => {
@@ -21,5 +25,5 @@ module.exports.launch = (JustDoInjection) => {
     return require('./lib/linux-emit').launch(JustDoInjection);
   }
 
-  throw new Error('Linux and Windows only');
+  throw new Error(`${process.platform} is not supported`);
 };
